@@ -12,6 +12,7 @@ class App extends React.Component {
     this.fds = this.fds.bind(this);
     this.fdsAntes = this.fdsAntes.bind(this);
     this.raridade = this.raridade.bind(this);
+    this.trunfado = this.trunfado.bind(this);
     this.state = {
       nameInput: '',
       descriptionInput: '',
@@ -26,6 +27,7 @@ class App extends React.Component {
       hasTrunfo: false,
       filterName: '',
       filterRare: '',
+      filterSuper: 'false',
     };
   }
 
@@ -91,6 +93,11 @@ class App extends React.Component {
     this.setState({ [name]: value });
   }
 
+  trunfado(event) {
+    const { name, checked } = event.target;
+    this.setState({ [name]: checked.toString() });
+  }
+
   save() {
     const { cardTrunfo, nameInput, descriptionInput, attr1, attr2,
       attr3, cardImage, cardRare } = this.state;
@@ -103,7 +110,7 @@ class App extends React.Component {
       attr3: 0,
       hasTrunfo: cardTrunfo === true ? true : prevState.hasTrunfo,
       cardTrunfo: false,
-      cardRare: 'Normal',
+      cardRare: 'normal',
       myCards: [
         ...prevState.myCards,
         {
@@ -124,7 +131,7 @@ class App extends React.Component {
   render() {
     const { nameInput, descriptionInput, cardImage, attr1, attr2, attr3,
       cardRare, cardTrunfo, isSaveButtonDisabled,
-      hasTrunfo, filterName, myCards, filterRare } = this.state;
+      hasTrunfo, filterName, myCards, filterRare, filterSuper } = this.state;
     return (
       <>
         <h1 data-testid="title" className="center">
@@ -179,12 +186,20 @@ class App extends React.Component {
           <option>raro</option>
           <option>muito raro</option>
         </select>
+        <input
+          type="checkbox"
+          value3={ filterSuper }
+          onChange={ this.trunfado }
+          name="filterSuper"
+          data-testid="trunfo-filter"
+        />
         {myCards.length > 0 ? (
           <SavedCards
             value={ filterName }
             value2={ filterRare }
             remove={ this.remove }
             myCards={ myCards }
+            value3={ filterSuper }
           />
         ) : (
           ''
