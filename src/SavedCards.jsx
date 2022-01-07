@@ -4,9 +4,11 @@ import Card from './components/Card';
 
 class SavedCards extends React.Component {
   render() {
-    const { myCards, remove, value } = this.props;
+    const { myCards, remove, value, value2 } = this.props;
     const cartas = myCards
       .filter((carta) => carta.cardName.includes(value))
+      .filter((card) => (value2 !== '' ? card.cardRare === value2
+        : card.cardRare.includes(value2)))
       .map((carta) => (
         <fieldset key={ Math.random() } data-testid="field2" id="field2">
           <Card
@@ -37,6 +39,7 @@ SavedCards.propTypes = {
   myCards: propTypes.arrayOf(propTypes.object).isRequired,
   remove: propTypes.func.isRequired,
   value: propTypes.string.isRequired,
+  value2: propTypes.string.isRequired,
 };
 
 export default SavedCards;

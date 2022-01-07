@@ -11,6 +11,7 @@ class App extends React.Component {
     this.remove = this.remove.bind(this);
     this.fds = this.fds.bind(this);
     this.fdsAntes = this.fdsAntes.bind(this);
+    this.raridade = this.raridade.bind(this);
     this.state = {
       nameInput: '',
       descriptionInput: '',
@@ -24,6 +25,7 @@ class App extends React.Component {
       myCards: [],
       hasTrunfo: false,
       filterName: '',
+      filterRare: '',
     };
   }
 
@@ -83,6 +85,12 @@ class App extends React.Component {
     console.log(event.target.nextSibling.innerHTML);
   }
 
+  raridade(event) {
+    const { name } = event.target;
+    const value = event.target.value === 'todas' ? '' : event.target.value;
+    this.setState({ [name]: value });
+  }
+
   save() {
     const { cardTrunfo, nameInput, descriptionInput, attr1, attr2,
       attr3, cardImage, cardRare } = this.state;
@@ -116,7 +124,7 @@ class App extends React.Component {
   render() {
     const { nameInput, descriptionInput, cardImage, attr1, attr2, attr3,
       cardRare, cardTrunfo, isSaveButtonDisabled,
-      hasTrunfo, filterName, myCards } = this.state;
+      hasTrunfo, filterName, myCards, filterRare } = this.state;
     return (
       <>
         <h1 data-testid="title" className="center">
@@ -160,9 +168,21 @@ class App extends React.Component {
           className="inputFilter"
           type="text"
         />
+        <select
+          name="filterRare"
+          onChange={ this.raridade }
+          value={ filterRare }
+          data-testid="rare-filter"
+        >
+          <option>todas</option>
+          <option>normal</option>
+          <option>raro</option>
+          <option>muito raro</option>
+        </select>
         {myCards.length > 0 ? (
           <SavedCards
             value={ filterName }
+            value2={ filterRare }
             remove={ this.remove }
             myCards={ myCards }
           />
