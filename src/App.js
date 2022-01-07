@@ -23,6 +23,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       myCards: [],
       hasTrunfo: false,
+      filterName: ''
     };
   }
 
@@ -158,8 +159,9 @@ class App extends React.Component {
         <h1 data-testid="cartas" className="center">
           Cartas
         </h1>
+        <input onChange={this.handleChange} name='filterName' value={this.state.filterName} placeholder='Filtrar' data-testid="name-filter" className='inputFilter' type='text'></input>
         {this.state.myCards.length > 0 ? (
-          <SavedCards remove={this.remove} myCards={this.state.myCards} />
+          <SavedCards value={this.state.filterName} remove={this.remove} myCards={this.state.myCards} />
         ) : (
           ""
         )}

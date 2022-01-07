@@ -19,8 +19,8 @@ class SavedCards extends React.Component {
   }
     
     render() {
-        const { myCards, remove } = this.props
-        const cartas = myCards.filter((carta) => carta.cardName.includes(this.state.filterName)).map((carta) => {
+        const { myCards, remove, value } = this.props
+        const cartas = myCards.filter((carta) => carta.cardName.includes(value)).map((carta) => {
            return <fieldset key={Math.random()} data-testid='field2' id='field2'><Card 
             cardName={carta.cardName} 
             cardDescription={carta.descriptionInput} 
@@ -38,8 +38,7 @@ class SavedCards extends React.Component {
         })
         return (
             <>
-            <h2 style={{textAlign: 'center'}}>Filtros</h2>
-            <input onChange={this.handleChange} name='filterName' value={this.state.filterName} placeholder='Filtrar' data-testid="name-filter" className='inputFilter' type='text'></input>       
+            <h2 style={{textAlign: 'center'}}>Filtros</h2>       
             {cartas}
             </> 
         )
