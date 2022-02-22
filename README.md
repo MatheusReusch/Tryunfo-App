@@ -5,4 +5,4 @@ A ideia principal desse projeto era construir uma aplicação na qual o usuário
 
 Os requisitos foram pensados de acordo com a experiência ideal do usuário.
 
-![alt text] 
+![requisito-12](images/requisito-12.png)
